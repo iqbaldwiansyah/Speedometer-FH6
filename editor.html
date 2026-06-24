@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Forza Overlay Live Editor</title>
+    <style>
+        body { margin: 0; padding: 0; display: flex; height: 100vh; font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: #eee; }
+        .sidebar { width: 340px; background: #2b2b2b; border-right: 1px solid #444; padding: 20px; box-sizing: border-box; overflow-y: auto; }
+        .preview { flex: 1; border: none; background: #000; }
+        h2 { margin-top: 0; font-size: 16px; border-bottom: 1px solid #444; padding-bottom: 8px; color: #4fd8e8; }
+        .form-group { margin-bottom: 12px; }
+        label { display: block; font-size: 12px; color: #bbb; margin-bottom: 4px; }
+        select, input[type="text"], input[type="color"] { width: 100%; padding: 6px; border: 1px solid #555; background: #111; color: #fff; border-radius: 4px; box-sizing: border-box; font-size: 13px; }
+        input[type="color"] { padding: 2px; height: 30px; cursor: pointer; }
+        input[type="range"] { width: 100%; cursor: pointer; }
+        .checkbox-group { display: flex; align-items: center; gap: 8px; }
+        .checkbox-group input { width: 16px; height: 16px; cursor: pointer; }
+        .checkbox-group label { margin: 0; display: inline; cursor: pointer; }
+        .buttons { display: flex; gap: 10px; margin-top: 20px; }
+        button { flex: 1; padding: 10px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 13px; }
+        button:hover { filter: brightness(1.1); }
+        .btn-save { background: #3ddc84; color: #000; }
+        .btn-run { background: #4fd8e8; color: #000; }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>PENGATURAN FONT</h2>
+    <div class="form-group">
+        <label>Font Utama (Label/Teks Bawah)</label>
+        <select id="font_utama">
+            <option value="'Rajdhani', sans-serif">Rajdhani</option>
+            <option value="'Oxanium', monospace">Oxanium</option>
+            <option value="'Orbitron', sans-serif">Orbitron</option>
+            <option value="'Roboto Mono', monospace">Roboto Mono</option>
+            <option value="'Oswald', sans-serif">Oswald</option>
+            <option value="'Teko', sans-serif">Teko</option>
+            <option value="'Audiowide', cursive">Audiowide</option>
+            <option value="Arial, sans-serif">Arial</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Font Angka (KM/H & RPM Besar)</label>
+        <select id="font_angka">
+            <option value="'Oxanium', monospace">Oxanium</option>
+            <option value="'Rajdhani', sans-serif">Rajdhani</option>
+            <option value="'Orbitron', sans-serif">Orbitron</option>
+            <option value="'Roboto Mono', monospace">Roboto Mono</option>
+            <option value="'Oswald', sans-serif">Oswald</option>
+            <option value="'Teko', sans-serif">Teko</option>
+            <option value="'Audiowide', cursive">Audiowide</option>
+            <option value="Impact, sans-serif">Impact</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Font Angka Speedo (0, 20, 40... Ticks)</label>
+        <select id="font_angka_speedo">
+            <option value="'Rajdhani', sans-serif">Rajdhani</option>
+            <option value="'Oxanium', monospace">Oxanium</option>
+            <option value="'Orbitron', sans-serif">Orbitron</option>
+            <option value="'Roboto Mono', monospace">Roboto Mono</option>
+            <option value="'Oswald', sans-serif">Oswald</option>
+            <option value="'Teko', sans-serif">Teko</option>
+            <option value="'Audiowide', cursive">Audiowide</option>
+            <option value="Arial, sans-serif">Arial</option>
+        </select>
+    </div>
+
+    <h2>WARNA TEKS & ANGKA</h2>
+    <div class="form-group"><label>Warna Grup Merah (Label KM/H & GEAR)</label><input type="color" id="warna_grup_merah" value="#8a93a1"></div>
+    <div class="form-group"><label>Warna Grup Hijau (Angka Speed & Label RPM)</label><input type="color" id="warna_grup_hijau" value="#eef2f6"></div>
+    <div class="form-group"><label>Warna Grup Kuning (Angka Ticks, Gear, Angka RPM)</label><input type="color" id="warna_grup_kuning" value="#eef2f6"></div>
+
+    <h2>WARNA GARIS & JARUM</h2>
+    <div class="form-group"><label>Warna Garis Utama (Tebal)</label><input type="color" id="warna_garis_tebal" value="#eef2f6"></div>
+    <div class="form-group"><label>Warna Garis Biasa (Tipis)</label><input type="color" id="warna_garis_biasa" value="#8a93a1"></div>
+    <div class="form-group"><label>Warna Jarum Speedo</label><input type="color" id="warna_jarum_speedo" value="#4fd8e8"></div>
+    <div class="form-group"><label>Warna Jarum Tacho</label><input type="color" id="warna_jarum_tacho" value="#ffb347"></div>
+    <div class="form-group"><label>Warna Redline</label><input type="color" id="warna_redline" value="#ff3b30"></div>
+    <div class="form-group"><label>Background Dashboard (Luar)</label><input type="color" id="warna_background_utama" value="#0b0d10"></div>
+
+    <h2>VISUAL GAMBAR (DIAL BG)</h2>
+    <div class="form-group">
+        <label>Jarak Antar Meteran (Gap): <span id="val_gap">30</span>px</label>
+        <input type="range" id="jarak_meteran" min="0" max="100" step="1" value="30">
+    </div>
+    <div class="form-group checkbox-group">
+        <input type="checkbox" id="tampilkan_kotak_digital" checked>
+        <label for="tampilkan_kotak_digital">Tampilkan Kotak Hitam Digital</label>
+    </div>
+    <div class="form-group">
+        <label>Transparansi Gambar: <span id="val_opacity">1.0</span> (Lebih kecil = pudar)</label>
+        <input type="range" id="opasitas_gambar" min="0" max="1" step="0.05" value="1.0">
+    </div>
+    <div class="form-group">
+        <label>Kecerahan Gambar: <span id="val_darkness">1.0</span> (Lebih kecil = gelap)</label>
+        <input type="range" id="kecerahan_gambar" min="0" max="1" step="0.05" value="1.0">
+    </div>
+
+    <div class="buttons">
+        <button class="btn-save" id="btnSave">Simpan</button>
+        <button class="btn-run" id="btnRun">Mulai Relay</button>
+    </div>
+</div>
+
+<iframe class="preview" id="previewFrame" src="forza_overlay.html"></iframe>
+
+<script>
+    // Memuat config lama jika ada
+    fetch('config.js?t=' + Date.now()).then(res => res.text()).then(text => {
+        const matches = text.matchAll(/(\w+):\s*["']([^"']+)["']/g);
+        for (const match of matches) {
+            const el = document.getElementById(match[1]);
+            if (el) {
+                if (el.type === 'checkbox') {
+                    el.checked = match[2] === 'true';
+                } else {
+                    el.value = match[2];
+                }
+            }
+        }
+        updateLabels();
+        setTimeout(sendToIframe, 500); // Sinkronisasi awal ke iframe
+    }).catch(e => console.log("Gagal memuat config.js, pakai default"));
+
+    function updateLabels() {
+        document.getElementById('val_opacity').textContent = document.getElementById('opasitas_gambar').value;
+        document.getElementById('val_gap').textContent = document.getElementById('jarak_meteran').value;
+        document.getElementById('val_darkness').textContent = document.getElementById('kecerahan_gambar').value;
+    }
+
+    function gatherConfig() {
+        return {
+            font_utama: document.getElementById('font_utama').value,
+            font_angka: document.getElementById('font_angka').value,
+            font_angka_speedo: document.getElementById('font_angka_speedo').value,
+            warna_grup_merah: document.getElementById('warna_grup_merah').value,
+            warna_grup_hijau: document.getElementById('warna_grup_hijau').value,
+            warna_grup_kuning: document.getElementById('warna_grup_kuning').value,
+            warna_garis_tebal: document.getElementById('warna_garis_tebal').value,
+            warna_garis_biasa: document.getElementById('warna_garis_biasa').value,
+            warna_jarum_speedo: document.getElementById('warna_jarum_speedo').value,
+            warna_jarum_tacho: document.getElementById('warna_jarum_tacho').value,
+            warna_redline: document.getElementById('warna_redline').value,
+            warna_background_utama: document.getElementById('warna_background_utama').value,
+            jarak_meteran: document.getElementById('jarak_meteran').value,
+            tampilkan_kotak_digital: document.getElementById('tampilkan_kotak_digital').checked ? "true" : "false",
+            opasitas_gambar: document.getElementById('opasitas_gambar').value,
+            kecerahan_gambar: document.getElementById('kecerahan_gambar').value
+        };
+    }
+
+    function sendToIframe() {
+        const frame = document.getElementById('previewFrame').contentWindow;
+        frame.postMessage({ type: 'update_config', config: gatherConfig() }, '*');
+        updateLabels();
+    }
+
+    // Dengarkan perubahan pada input dan select
+    document.querySelectorAll('input, select').forEach(el => {
+        el.addEventListener('input', sendToIframe);
+        el.addEventListener('change', sendToIframe);
+    });
+
+    document.getElementById('btnSave').addEventListener('click', () => {
+        fetch('/save', {
+            method: 'POST',
+            body: JSON.stringify(gatherConfig())
+        }).then(() => alert('Konfigurasi berhasil disimpan!'));
+    });
+
+    document.getElementById('btnRun').addEventListener('click', () => {
+        fetch('/save', {
+            method: 'POST',
+            body: JSON.stringify(gatherConfig())
+        }).then(() => {
+            fetch('/run_relay', { method: 'POST' });
+        });
+    });
+</script>
+</body>
+</html>
