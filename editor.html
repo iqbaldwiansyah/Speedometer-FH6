@@ -26,7 +26,17 @@
 <body>
 
 <div class="sidebar">
-    <h2>PENGATURAN FONT</h2>
+    <h2>PENGATURAN TEMA & FONT</h2>
+    <div class="form-group">
+        <label>Tema Aktif</label>
+        <select id="tema_aktif">
+            <option value="default">Memuat daftar tema...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Ukuran Font Nama Mobil (px)</label>
+        <input type="number" id="ukuran_font_mobil" value="13" min="8" max="40" style="width: 100%; padding: 6px; border: 1px solid #555; background: #111; color: #fff; border-radius: 4px; box-sizing: border-box; font-size: 13px;">
+    </div>
     <div class="form-group">
         <label>Font Utama (Label/Teks Bawah)</label>
         <select id="font_utama">
@@ -104,11 +114,10 @@
     </div>
 </div>
 
-<iframe class="preview" id="previewFrame" src="forza_overlay.html"></iframe>
+<iframe class="preview" id="previewFrame" src="overlay_transparent.html"></iframe>
 
 <script>
-    // Memuat config lama jika ada
-    fetch('config.js?t=' + Date.now()).then(res => res.text()).then(text => {
+    function parseAndApplyConfig(text) {
         const matches = text.matchAll(/(\w+):\s*["']([^"']+)["']/g);
         for (const match of matches) {
             const el = document.getElementById(match[1]);
@@ -120,9 +129,53 @@
                 }
             }
         }
-        updateLabels();
-        setTimeout(sendToIframe, 500); // Sinkronisasi awal ke iframe
-    }).catch(e => console.log("Gagal memuat config.js, pakai default"));
+    }
+
+    function loadThemeConfig(theme) {
+        fetch(`themes/${theme}/config.js?t=` + Date.now())
+            .then(res => res.text())
+            .then(text => {
+                parseAndApplyConfig(text);
+                updateLabels();
+                sendToIframe(); // Sinkronisasi ke iframe setelah config tema dimuat
+            })
+            .catch(e => console.log("Gagal memuat config tema " + theme));
+    }
+
+    // Memuat config utama (tema_aktif) SETELAH daftar tema dimuat
+    function initConfigs() {
+        fetch('config.js?t=' + Date.now()).then(res => res.text()).then(text => {
+            parseAndApplyConfig(text);
+            const currentTheme = document.getElementById('tema_aktif').value || 'default';
+            loadThemeConfig(currentTheme);
+        }).catch(e => {
+            console.log("Gagal memuat root config.js");
+            loadThemeConfig('default');
+        });
+    }
+
+    // Mengambil daftar tema secara dinamis dari folder
+    fetch('/themes_list')
+        .then(res => res.json())
+        .then(themes => {
+            const select = document.getElementById('tema_aktif');
+            select.innerHTML = '';
+            themes.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.id;
+                opt.textContent = t.name;
+                select.appendChild(opt);
+            });
+            initConfigs();
+        })
+        .catch(e => {
+            console.log("Server tidak mendukung /themes_list, gunakan fallback");
+            initConfigs();
+        });
+
+    document.getElementById('tema_aktif').addEventListener('change', (e) => {
+        loadThemeConfig(e.target.value);
+    });
 
     function updateLabels() {
         document.getElementById('val_opacity').textContent = document.getElementById('opasitas_gambar').value;
@@ -132,6 +185,7 @@
 
     function gatherConfig() {
         return {
+            tema_aktif: document.getElementById('tema_aktif').value,
             font_utama: document.getElementById('font_utama').value,
             font_angka: document.getElementById('font_angka').value,
             font_angka_speedo: document.getElementById('font_angka_speedo').value,
@@ -147,7 +201,8 @@
             jarak_meteran: document.getElementById('jarak_meteran').value,
             tampilkan_kotak_digital: document.getElementById('tampilkan_kotak_digital').checked ? "true" : "false",
             opasitas_gambar: document.getElementById('opasitas_gambar').value,
-            kecerahan_gambar: document.getElementById('kecerahan_gambar').value
+            kecerahan_gambar: document.getElementById('kecerahan_gambar').value,
+            ukuran_font_mobil: document.getElementById('ukuran_font_mobil').value
         };
     }
 
