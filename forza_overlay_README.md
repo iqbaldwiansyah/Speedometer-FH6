@@ -20,7 +20,7 @@ Buka game Forza Horizon 6, masuk ke:
 
 ## 3. Cara Mengatur Konfigurasi (Warna, Font, Jarak)
 Anda dapat mengubah tampilan overlay secara *live* tanpa coding!
-1. Jalankan `python config_tool.py`.
+1. Double-klik file **`start_configurator.bat`** (atau jalankan `python config_tool.py` secara manual).
 2. Browser Anda akan otomatis membuka **Live Web Configurator**.
 3. Di sini Anda bisa mengatur:
    - Font untuk label dan angka digital
