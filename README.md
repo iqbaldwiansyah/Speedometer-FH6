@@ -41,15 +41,15 @@ Anda bisa mengganti background dari speedometer dan tachometer sesuai selera And
 1. Buka OBS Studio.
 2. Di panel **Sources**, klik tombol **+** dan pilih **Browser**.
 3. Centang kotak **Local file** dan klik **Browse**.
-4. Pilih file `forza_overlay.html` di folder ini.
+4. Pilih file `overlay_transparent.html` di folder ini.
 5. Atur ukurannya (misal Width: 800, Height: 400).
 6. Hapus isi dari kolom **Custom CSS** agar background benar-benar transparan.
 7. Klik OK, lalu posisikan overlay di atas layar game Anda.
 
 ## 6. Cara Memasang di TikTok Live Studio
 1. Buka TikTok Live Studio.
-2. Tambahkan Source baru, pilih **Link / Tautan Web** (jika ada dukungan file lokal, pilih file `forza_overlay.html`).
-3. Jika TikTok Studio tidak mendukung file lokal secara langsung, Anda bisa membuka `forza_overlay.html` di browser (seperti Chrome), lalu di TikTok Studio tambahkan **Window Capture** / **Tangkapan Jendela**.
+2. Tambahkan Source baru, pilih **Link / Tautan Web** (jika ada dukungan file lokal, pilih file `overlay_transparent.html`).
+3. Jika TikTok Studio tidak mendukung file lokal secara langsung, Anda bisa membuka `overlay_transparent.html` di browser (seperti Chrome), lalu di TikTok Studio tambahkan **Window Capture** / **Tangkapan Jendela**.
 4. Jika menggunakan Window Capture, Anda bisa menggunakan fitur *Chroma Key* di TikTok Studio untuk menghilangkan background hitamnya jika diperlukan. (Catatan: Overlay ini secara native sudah transparan jika di-load sebagai Browser Source).
 
 ## Catatan Tambahan
