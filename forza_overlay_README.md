@@ -4,12 +4,9 @@ Overlay speedometer dan tachometer untuk Forza Horizon 6 berbasis web yang bisa 
 
 ## 1. Persiapan & Menjalankan Relay
 Overlay ini membutuhkan script Python untuk meneruskan data dari game (UDP) ke browser (WebSocket).
-1. Pastikan Anda sudah menginstal Python.
-2. Install library yang dibutuhkan:
-   ```cmd
-   pip install websockets
-   ```
-3. Jalankan file **`start.bat`** (atau jalankan `python forza_relay.py` secara manual). 
+1. Double-klik file **`install_requirements.bat`**. Script ini otomatis mengecek apakah Python sudah terinstal dan akan menginstal library yang dibutuhkan (`websockets`).
+2. Jika Python belum terinstal, script akan mengarahkan Anda untuk mendownloadnya. **Penting:** Pastikan mencentang "Add Python to PATH" saat menginstal Python.
+3. Setelah instalasi selesai, jalankan file **`start.bat`** (atau `python forza_relay.py` secara manual). 
 4. Biarkan jendela console tetap terbuka selama Anda bermain.
 
 Secara default relay mendengar UDP di port **7777** dan menyiarkan ke WebSocket di **ws://localhost:8765**.
