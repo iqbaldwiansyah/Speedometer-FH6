@@ -19,6 +19,12 @@
 - **Sistem Tema Dinamis**: Ganti desain *dial* atau panel dengan mudah. Tersedia beberapa tema bawaan.
 - **Siap Streaming**: Layar otomatis transparan. Tinggal pasang di OBS Studio atau TikTok Live Studio.
 
+### 📥 Cara Download / Instalasi
+1. Klik tombol hijau **Code** di kanan atas halaman repositori ini.
+2. Pilih **Download ZIP** lalu ekstrak folder tersebut di komputer Anda.
+   *(Bagi pengguna Git: `git clone https://github.com/iqbaldwiansyah/Speedometer-FH6.git`)*
+3. Masuk ke dalam folder hasil ekstraksi tersebut.
+
 ### 🚀 Cara Penggunaan
 1. **Persiapan:** Double-klik file **`install_requirements.bat`**. Script ini otomatis mengecek dan menginstal Python serta *library* yang dibutuhkan (`websockets`). *(Catatan: Pastikan mencentang "Add Python to PATH" saat menginstal Python)*.
 2. **Jalankan Relay:** Setelah siap, double-klik **`start.bat`** untuk mulai menerima data dari game. Biarkan jendela console tetap terbuka selama Anda bermain.
@@ -56,6 +62,12 @@ Ingin menambahkan fitur, memperbaiki *bug*, atau mengembangkan script ini? Sanga
 - **Live Web Configurator**: Tweak font sizes, text colors, needles, gauge spacing, and UI visibility in real-time—no coding required.
 - **Dynamic Theme System**: Switch dial background designs on the fly. Comes with multiple built-in themes.
 - **Stream Ready**: Natively transparent background. Drag and drop ready for OBS Studio or TikTok Live Studio.
+
+### 📥 How to Download / Install
+1. Click the green **Code** button at the top right of this repository.
+2. Select **Download ZIP** and extract the folder on your computer.
+   *(For Git users: `git clone https://github.com/iqbaldwiansyah/Speedometer-FH6.git`)*
+3. Open the extracted folder.
 
 ### 🚀 How to Use
 1. **Prerequisites:** Double-click **`install_requirements.bat`**. This will check for Python and install the required library (`websockets`). *(Note: Ensure you check "Add Python to PATH" if installing Python for the first time).*
