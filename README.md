@@ -30,12 +30,14 @@ Anda dapat mengubah tampilan overlay secara *live* tanpa coding!
 4. Klik **Simpan** untuk menerapkan perubahan ke overlay utama Anda.
 
 ## 4. Cara Membuat Custom Tema (Gambar Dial)
-Anda bisa mengganti background dari speedometer dan tachometer sesuai selera Anda.
-1. Buat gambar desain Anda dengan ukuran **direkomendasikan 600x600 pixels** (aspek rasio 1:1) dan simpan dalam format `.png` dengan *background transparent*.
-2. Simpan gambar tersebut ke dalam folder `image/`.
+Anda bisa membuat tema background custom untuk speedometer dan tachometer sesuai selera Anda dengan sistem tema baru.
+1. Buat folder baru di dalam folder **`themes/`** (misalnya `themes/Tema_Saya`).
+2. Siapkan desain Anda dengan ukuran **direkomendasikan 600x600 pixels** (aspek rasio 1:1) berformat `.png` transparan.
+3. Simpan gambar tersebut ke dalam folder tema Anda:
    - Untuk Speedometer: beri nama `speedometer.png`
    - Untuk Tachometer: beri nama `tacho.png`
-3. Refresh overlay Anda, dan gambar akan otomatis termuat. Anda bisa mengatur tingkat kecerahan dan transparansi gambar melalui Configurator.
+4. Copy file `config.js` dan `description.json` dari folder tema lain (misalnya dari `themes/default/`) ke dalam folder tema baru Anda. Anda bisa mengedit `description.json` untuk mengganti nama tema.
+5. Jalankan **Live Web Configurator**, dan tema baru Anda akan otomatis muncul di daftar pilihan tema siap untuk digunakan!
 
 ## 5. Cara Memasang di OBS Studio
 1. Buka OBS Studio.
