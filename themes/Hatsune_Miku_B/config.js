@@ -1,7 +1,7 @@
 var THEME_CONFIG = {
-    font_utama: "'Audiowide', cursive",
-    font_angka: "'Orbitron', sans-serif",
-    font_angka_speedo: "'Orbitron', sans-serif",
+    font_utama: "'Rajdhani', sans-serif",
+    font_angka: "'Oxanium', monospace",
+    font_angka_speedo: "'Rajdhani', sans-serif",
     warna_grup_merah: "#ffffff",
     warna_grup_hijau: "#ffffff",
     warna_grup_kuning: "#ffffff",
