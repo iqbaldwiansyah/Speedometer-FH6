@@ -1,3 +1,3 @@
 const OVERLAY_CONFIG = {
-    tema_aktif: "Megumin"
+    tema_aktif: "Tenka_Izumo"
 };
